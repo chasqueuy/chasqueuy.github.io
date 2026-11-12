@@ -94,10 +94,10 @@
 <section class="hero">
   <div class="wrap">
     <h1>Lo que te gusta, <em>sin vueltas.</em></h1>
-    <p>Como los chasques de antes, que llevaban lo importante de pago en pago. Chocolates exclusivos de Cacau Show, almacén y una línea sin gluten y sin lactosa. Elegí, pedí y listo.</p>
+    <p>Como los chasques de antes, que llevaban lo importante de pago en pago. Chocolates exclusivos de Cacau Show, almacén, tés y una línea sin gluten y sin lactosa. Elegí, pedí y listo.</p>
     <a class="cta" href="#tienda">Ver productos</a>
     <div class="pills">
-      <span class="pill">Cacau Show</span><span class="pill">Sin gluten</span><span class="pill">Sin lactosa</span><span class="pill">Almacén</span><span class="pill">Higiene y limpieza</span>
+      <span class="pill">Cacau Show</span><span class="pill">Sin gluten</span><span class="pill">Sin lactosa</span><span class="pill">Almacén</span><span class="pill">Tés e infusiones</span>
     </div>
   </div>
 </section>
@@ -114,7 +114,7 @@
       <div class="step"><b>1</b><h3>Elegí</h3><p>Sumá al carrito los productos que querés.</p></div>
       <div class="step"><b>2</b><h3>Confirmá</h3><p>Completá tus datos y elegí cómo recibir tu pedido.</p></div>
       <div class="step"><b>3</b><h3>Pagá</h3><p>Te enviamos los datos de pago y apartamos tu pedido.</p></div>
-      <div class="step"><b>4</b><h3>Retirá</h3><p>Pasás por la tienda en Santana do Livramento y listo.</p></div>
+      <div class="step"><b>4</b><h3>Recibí</h3><p>Retirás en la tienda en Santana do Livramento o te lo enviamos por la empresa que elijas, con el envío pago al recibir.</p></div>
     </div>
   </div>
 </section>
@@ -136,9 +136,9 @@
       <div><label for="tel">Celular</label><input id="tel" required inputmode="tel" placeholder="09X XXX XXX"></div>
       <div class="opt"><input type="radio" name="entrega" value="Retiro en tienda, Santana do Livramento" checked id="e1">
         <label for="e1">Retiro en tienda<small>Rua dos Andradas, Santana do Livramento. Sin costo.</small></label></div>
-      <div class="opt off"><input type="radio" name="entrega" value="envio" disabled id="e2">
-        <label for="e2">Envío a todo Uruguay<small>Próximamente.</small></label></div>
-      <div><label for="obs">Comentarios</label><textarea id="obs" rows="2" placeholder="Horario de retiro, algún pedido especial..."></textarea></div>
+      <div class="opt"><input type="radio" name="entrega" value="Envío por la empresa que elijo, pago al recibir" id="e2">
+        <label for="e2">Envío a todo Uruguay<small>Por la empresa que prefieras. El envío se paga al recibir.</small></label></div>
+      <div><label for="obs">Comentarios</label><textarea id="obs" rows="2" placeholder="Empresa de envío y dirección, o horario de retiro..."></textarea></div>
       <p class="err" id="err">Agregá al menos un producto al carrito.</p>
       <button class="go" type="submit">Confirmar pedido</button>
       <div class="done" id="done">¡Listo! Tu pedido está armado. Tocá el botón para enviarlo y te respondemos con los datos de pago.
@@ -153,15 +153,52 @@
    precio: en pesos uruguayos. Dejá null mientras no esté definido.
    foto: opcional, una imagen en data URI. */
 const PRODUCTOS = [
-  {id:1, nombre:"Producto de ejemplo Cacau Show", detalle:"Descripción corta y peso", cat:"Cacau Show", precio:null, foto:null},
-  {id:2, nombre:"Producto de ejemplo Cacau Show", detalle:"Descripción corta y peso", cat:"Cacau Show", precio:null, foto:null},
-  {id:3, nombre:"Producto de ejemplo sin gluten", detalle:"Descripción corta y peso", cat:"Sin gluten y sin lactosa", precio:null, foto:null},
-  {id:4, nombre:"Producto de ejemplo sin lactosa", detalle:"Descripción corta y peso", cat:"Sin gluten y sin lactosa", precio:null, foto:null},
-  {id:5, nombre:"Producto de ejemplo almacén", detalle:"Descripción corta y peso", cat:"Almacén", precio:null, foto:null},
-  {id:6, nombre:"Producto de ejemplo limpieza", detalle:"Descripción corta y presentación", cat:"Higiene y limpieza", precio:null, foto:null},
+  {id:1, nombre:"Kit 6 Trufas Surtidas Bless sin azúcar", detalle:"6 trufas surtidas", cat:"Cacau Show", precio:372, foto:null},
+  {id:2, nombre:"Tableta Lacreme sin azúcar agregado", detalle:"100 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:3, nombre:"Tableta Lacreme Blanco sin azúcar agregado", detalle:"100 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:4, nombre:"Tableta Bendito Cacao 70%", detalle:"100 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:5, nombre:"Tableta Bendito Cacao 72%", detalle:"100 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:6, nombre:"Tableta Bendito Cacao 85%", detalle:"100 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:7, nombre:"Tableta Bendito Cacao 86%", detalle:"100 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:8, nombre:"Tableta Dedo de Dios 67% cacao", detalle:"100 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:9, nombre:"Tableta Lacreme con leche", detalle:"100 g", cat:"Cacau Show", precio:223, foto:null},
+  {id:10, nombre:"Tableta Lacreme Mezzo", detalle:"100 g", cat:"Cacau Show", precio:223, foto:null},
+  {id:11, nombre:"Tableta Lacreme Gianduia avellana", detalle:"100 g", cat:"Cacau Show", precio:223, foto:null},
+  {id:12, nombre:"Tableta Lacreme Blanco con pistacho", detalle:"100 g", cat:"Cacau Show", precio:223, foto:null},
+  {id:13, nombre:"Tableta Lacreme Kids", detalle:"130 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:14, nombre:"Tableta Dreams Torta de Maracuyá", detalle:"130 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:15, nombre:"Tableta Dreams Torta de Frutilla", detalle:"130 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:16, nombre:"Tableta Dreams Crème Brûlée", detalle:"130 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:17, nombre:"Tableta Dreams Mil Hojas", detalle:"130 g", cat:"Cacau Show", precio:240, foto:null},
+  {id:18, nombre:"Bombones de chocolate con leche La Creme", detalle:"108 g", cat:"Cacau Show", precio:311, foto:null},
+  {id:19, nombre:"Bombonera Bombones Surtidos Clássicos", detalle:"360 g", cat:"Cacau Show", precio:691, foto:null},
+  {id:20, nombre:"Kit Trufas Surtidas", detalle:"10 unidades", cat:"Cacau Show", precio:476, foto:null},
+  {id:21, nombre:"Lata Batmóvil con trufas de chocolate", detalle:"108 g", cat:"Cacau Show", precio:734, foto:null},
+  {id:22, nombre:"Chocolate con leche Harry Potter", detalle:"47 g", cat:"Cacau Show", precio:264, foto:null},
+  {id:23, nombre:"Chocolate con leche DC Villanos con card exclusivo", detalle:"40 g", cat:"Cacau Show", precio:195, foto:null},
+  {id:24, nombre:"La Creme Kids con leche Vaca", detalle:"150 g", cat:"Cacau Show", precio:541, foto:null},
+  {id:25, nombre:"La Creme Trufado de chocolate", detalle:"650 g", cat:"Cacau Show", precio:975, foto:null},
+  {id:26, nombre:"Pan dulce gotas de chocolate", detalle:"450 g", cat:"Cacau Show", precio:465, foto:null},
+  {id:27, nombre:"Pan dulce relleno de brigadeiro", detalle:"580 g", cat:"Cacau Show", precio:888, foto:null},
+  {id:28, nombre:"Pan dulce Lacreme relleno de leche", detalle:"650 g", cat:"Cacau Show", precio:936, foto:null},
+  {id:29, nombre:"Panetón relleno trufa de chocolate", detalle:"420 g", cat:"Cacau Show", precio:596, foto:null},
+  {id:30, nombre:"Panettone frutas cristalizadas", detalle:"450 g", cat:"Cacau Show", precio:407, foto:null},
+  {id:31, nombre:"Panettone trufado gotas de chocolate con leche", detalle:"750 g", cat:"Cacau Show", precio:1234, foto:null},
+  {id:32, nombre:"Set maquillaje Chicas Superpoderosas con chocolates", detalle:"Set con chocolates", cat:"Cacau Show", precio:829, foto:null},
+  {id:33, nombre:"Bolsa de terciopelo Claudete Chocomonstros", detalle:"Rosa", cat:"Cacau Show", precio:304, foto:null},
+  {id:34, nombre:"Pinza para el cabello Loco Ludovico Chocomonstros", detalle:"Verde", cat:"Cacau Show", precio:170, foto:null},
+  {id:35, nombre:"Tableta Lacreme Zero Lactosa", detalle:"100 g", cat:"Sin gluten y sin lactosa", precio:240, foto:null},
+  {id:36, nombre:"Tableta Miau Bless con leche Zero Lactosa", detalle:"70 g", cat:"Sin gluten y sin lactosa", precio:223, foto:null},
+  {id:37, nombre:"Kit 10 Tiritas Glulac sin gluten", detalle:"10 snacks de 100 g", cat:"Sin gluten y sin lactosa", precio:1471, foto:null},
+  {id:38, nombre:"Desinchá Noche", detalle:"60 saquitos", cat:"Tés e infusiones", precio:605, foto:null},
+  {id:39, nombre:"Desinchá Kit 60 días", detalle:"Té funcional", cat:"Tés e infusiones", precio:605, foto:null},
+  {id:40, nombre:"Desinchá Naranja con Canela", detalle:"10 saquitos", cat:"Tés e infusiones", precio:605, foto:null},
+  {id:41, nombre:"Vinagre de manzana orgánico Fazenda São Roque", detalle:"500 ml, vidrio", cat:"Almacén", precio:268, foto:null},
+  {id:42, nombre:"Canasta Familiar", detalle:"12 productos esenciales para el hogar", cat:"Almacén", precio:3040, foto:null},
+  {id:43, nombre:"Canasta Familiar de Alimentos", detalle:"12 productos esenciales", cat:"Almacén", precio:2824, foto:null},
 ];
 const WHATSAPP = "59895901032";
-const COLORES = {"Cacau Show":"#5a3424","Sin gluten y sin lactosa":"#2f6b3f","Almacén":"#c98a2b","Higiene y limpieza":"#3c6e8f"};
+const COLORES = {"Cacau Show":"#5a3424","Sin gluten y sin lactosa":"#2f6b3f","Almacén":"#c98a2b","Higiene y limpieza":"#3c6e8f","Tés e infusiones":"#6b5b3e"};
 
 const fmt = n => "$ " + Math.round(n).toLocaleString("es-UY");
 let filtro = "Todos";
