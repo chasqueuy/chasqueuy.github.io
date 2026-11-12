@@ -38,9 +38,9 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:18px 0 60px}
   .card{background:var(--papel);border:1px solid var(--linea);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
   .ph{aspect-ratio:1/1;display:grid;place-items:center;font-family:Fraunces,serif;font-size:44px;color:#fff;position:relative}
-  .ph img{width:100%;height:100%;object-fit:contain;background:#fff;padding:10px}
+  .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:10px}
   .ph.f{background:#fff!important}
-  .tag{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.92);color:var(--cacao);font:600 11px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;border-radius:999px;padding:4px 10px}
+  .tag{position:absolute;z-index:1;top:12px;left:12px;background:rgba(255,255,255,.92);color:var(--cacao);font:600 11px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;border-radius:999px;padding:4px 10px}
   .body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
   .body h3{font-size:16px;font-weight:600}
   .body .det{font-size:13px;color:var(--gris)}
