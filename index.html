@@ -114,7 +114,7 @@
     <div class="steps">
       <div class="step"><b>1</b><h3>Elegí</h3><p>Sumá al carrito los productos que querés.</p></div>
       <div class="step"><b>2</b><h3>Confirmá</h3><p>Completá tus datos y elegí cómo recibir tu pedido.</p></div>
-      <div class="step"><b>3</b><h3>Pagá</h3><p>Te enviamos los datos de pago y apartamos tu pedido.</p></div>
+      <div class="step"><b>3</b><h3>Pagá</h3><p>Elegís cómo pagar: link de Mercado Pago, transferencia Prex o Pix. Te enviamos los datos por WhatsApp y apartamos tu pedido.</p></div>
       <div class="step"><b>4</b><h3>Recibí</h3><p>Retirás en la tienda en Santana do Livramento o te lo enviamos por la empresa que elijas, con el envío pago al recibir.</p></div>
     </div>
   </div>
@@ -139,10 +139,17 @@
         <label for="e1">Retiro en tienda<small>Rua dos Andradas, Santana do Livramento. Sin costo.</small></label></div>
       <div class="opt"><input type="radio" name="entrega" value="Envío por la empresa que elijo, pago al recibir" id="e2">
         <label for="e2">Envío a todo Uruguay<small>Por la empresa que prefieras. El envío se paga al recibir.</small></label></div>
+      <div><label>Forma de pago</label></div>
+      <div class="opt"><input type="radio" name="pago" value="Link de Mercado Pago" checked id="p1">
+        <label for="p1">Mercado Pago<small>Te enviamos un link para pagar con tarjeta o saldo.</small></label></div>
+      <div class="opt"><input type="radio" name="pago" value="Transferencia Prex" id="p2">
+        <label for="p2">Transferencia Prex<small>Te enviamos los datos de la cuenta Prex.</small></label></div>
+      <div class="opt"><input type="radio" name="pago" value="Pix" id="p3">
+        <label for="p3">Pix<small>Para quien tiene cuenta en Brasil.</small></label></div>
       <div><label for="obs">Comentarios</label><textarea id="obs" rows="2" placeholder="Empresa de envío y dirección, o horario de retiro..."></textarea></div>
       <p class="err" id="err">Agregá al menos un producto al carrito.</p>
       <button class="go" type="submit">Confirmar pedido</button>
-      <div class="done" id="done">¡Listo! Tu pedido está armado. Tocá el botón para enviarlo y te respondemos con los datos de pago.
+      <div class="done" id="done">¡Listo! Tu pedido está armado. Tocá el botón para enviarlo y te respondemos con los datos para pagar.
         <a id="waLink" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
       </div>
     </form>
@@ -260,7 +267,7 @@ document.getElementById("checkout").addEventListener("submit",e=>{
   let total = 0;
   const lineas = ids.map(id=>{ const p=PRODUCTOS.find(x=>x.id==id); total+=(p.precio||0)*carrito[id]; return `• ${carrito[id]} x ${p.nombre} (${fmt((p.precio||0)*carrito[id])})`; });
   const entrega = document.querySelector('input[name="entrega"]:checked').value;
-  const msg = `Hola! Quiero hacer este pedido en Chasque:\n\n${lineas.join("\n")}\n\nTotal: ${fmt(total)}\nEntrega: ${entrega}\nNombre: ${document.getElementById("nombre").value}\nCelular: ${document.getElementById("tel").value}` + (document.getElementById("obs").value?`\nComentarios: ${document.getElementById("obs").value}`:"");
+  const msg = `Hola! Quiero hacer este pedido en Chasque:\n\n${lineas.join("\n")}\n\nTotal: ${fmt(total)}\nEntrega: ${entrega}\nPago: ${document.querySelector('input[name="pago"]:checked').value}\nNombre: ${document.getElementById("nombre").value}\nCelular: ${document.getElementById("tel").value}` + (document.getElementById("obs").value?`\nComentarios: ${document.getElementById("obs").value}`:"");
   document.getElementById("waLink").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
   document.getElementById("done").style.display = "block";
 });
