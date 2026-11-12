@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chasque | Tienda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cacao:#3b2116; --cacao2:#5a3424; --crema:#fbf5ec; --papel:#fffdf9;
+    --verde:#2f6b3f; --verde2:#e4efe5; --oro:#c98a2b; --tinta:#2a211c; --gris:#7a6e66; --linea:#eadfd1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--crema);color:var(--tinta);line-height:1.5}
+  button{font:inherit;cursor:pointer}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  header{position:sticky;top:0;z-index:20;background:rgba(251,245,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{font-family:Fraunces,serif;font-weight:800;font-size:22px;color:var(--cacao);letter-spacing:.2px}
+  .logo span{color:var(--verde)}
+  .cartbtn{display:flex;align-items:center;gap:8px;background:var(--cacao);color:#fff;border:0;border-radius:999px;padding:10px 18px;font-weight:600}
+  .badge{background:var(--oro);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px;padding:0 6px}
+
+  .hero{background:radial-gradient(1200px 400px at 85% 0%,#7a4a33 0%,transparent 60%),var(--cacao);color:#fff;padding:64px 0 72px}
+  .hero h1{font-family:Fraunces,serif;font-weight:800;font-size:clamp(34px,5.4vw,58px);line-height:1.05;max-width:720px}
+  .hero h1 em{font-style:normal;color:#f2c47a}
+  .hero p{margin-top:18px;max-width:560px;font-size:18px;color:#ecdccd}
+  .hero .cta{margin-top:28px;display:inline-block;background:#f2c47a;color:var(--cacao);font-weight:700;border-radius:999px;padding:14px 26px;text-decoration:none}
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+  .pill{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 14px;font-size:14px;color:#f3e6d8}
+
+  .filters{display:flex;gap:8px;overflow-x:auto;padding:28px 0 8px;scrollbar-width:none}
+  .chip{white-space:nowrap;border:1px solid var(--linea);background:var(--papel);border-radius:999px;padding:9px 16px;font-weight:500;color:var(--cacao2)}
+  .chip.on{background:var(--verde);border-color:var(--verde);color:#fff}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:18px 0 60px}
+  .card{background:var(--papel);border:1px solid var(--linea);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .ph{aspect-ratio:1/1;display:grid;place-items:center;font-family:Fraunces,serif;font-size:44px;color:#fff;position:relative}
+  .ph img{width:100%;height:100%;object-fit:cover}
+  .tag{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.92);color:var(--cacao);font:600 11px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;border-radius:999px;padding:4px 10px}
+  .body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .body h3{font-size:16px;font-weight:600}
+  .body .det{font-size:13px;color:var(--gris)}
+  .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px}
+  .price{font-weight:700;font-size:18px;color:var(--cacao)}
+  .price.pend{font-size:13px;font-weight:500;color:var(--gris)}
+  .add{background:var(--verde);color:#fff;border:0;border-radius:12px;padding:9px 14px;font-weight:600}
+  .add:disabled{background:#c9c1b8}
+
+  .how{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:54px 0}
+  .how h2{font-family:Fraunces,serif;font-size:32px;color:var(--cacao);margin-bottom:24px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .step{border:1px solid var(--linea);border-radius:16px;padding:20px;background:var(--crema)}
+  .step b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--cacao);color:#fff;margin-bottom:10px}
+  footer{padding:36px 0 60px;color:var(--gris);font-size:14px}
+
+  /* carrito */
+  .scrim{position:fixed;inset:0;background:rgba(30,18,12,.45);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:var(--papel);z-index:50;transform:translateX(100%);transition:.25s;display:flex;flex-direction:column}
+  .open .scrim{opacity:1;pointer-events:auto}
+  .open .drawer{transform:none}
+  .dh{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--linea)}
+  .dh h2{font-family:Fraunces,serif;color:var(--cacao)}
+  .x{border:0;background:none;font-size:26px;color:var(--gris)}
+  .items{flex:1;overflow:auto;padding:8px 20px}
+  .it{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--linea)}
+  .qty{display:flex;align-items:center;gap:8px}
+  .qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--linea);background:#fff}
+  .empty{color:var(--gris);padding:30px 0;text-align:center}
+  .df{padding:18px 20px;border-top:1px solid var(--linea);display:flex;flex-direction:column;gap:12px}
+  .tot{display:flex;justify-content:space-between;font-weight:700;font-size:18px}
+  label{font-size:13px;font-weight:600;color:var(--cacao2)}
+  input,textarea{width:100%;border:1px solid var(--linea);border-radius:10px;padding:10px 12px;font:inherit;background:#fff}
+  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--linea);border-radius:12px;padding:12px;background:#fff}
+  .opt.off{opacity:.55}
+  .opt small{display:block;color:var(--gris);font-weight:400}
+  .go{background:var(--verde);color:#fff;border:0;border-radius:14px;padding:14px;font-weight:700;font-size:16px}
+  .done{display:none;background:var(--verde2);border-radius:14px;padding:14px;font-size:14px}
+  .done a{display:block;margin-top:10px;text-align:center;background:var(--verde);color:#fff;border-radius:12px;padding:12px;font-weight:700;text-decoration:none}
+  .err{color:#a33;font-size:13px;display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="logo">Chas<span>que</span></div>
+    <button class="cartbtn" id="openCart">Carrito <span class="badge" id="count">0</span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Lo que te gusta, <em>sin vueltas.</em></h1>
+    <p>Como los chasques de antes, que llevaban lo importante de pago en pago. Chocolates exclusivos de Cacau Show, almacén y una línea sin gluten y sin lactosa. Elegí, pedí y listo.</p>
+    <a class="cta" href="#tienda">Ver productos</a>
+    <div class="pills">
+      <span class="pill">Cacau Show</span><span class="pill">Sin gluten</span><span class="pill">Sin lactosa</span><span class="pill">Almacén</span><span class="pill">Higiene y limpieza</span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap" id="tienda">
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<section class="how">
+  <div class="wrap">
+    <h2>Cómo comprar</h2>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>Elegí</h3><p>Sumá al carrito los productos que querés.</p></div>
+      <div class="step"><b>2</b><h3>Confirmá</h3><p>Completá tus datos y elegí cómo recibir tu pedido.</p></div>
+      <div class="step"><b>3</b><h3>Pagá</h3><p>Te enviamos los datos de pago y apartamos tu pedido.</p></div>
+      <div class="step"><b>4</b><h3>Retirá</h3><p>Pasás por la tienda en Santana do Livramento y listo.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p><b>Chasque</b> · Rua dos Andradas, Santana do Livramento · WhatsApp +598 95 901 032</p>
+  <p style="margin-top:6px">¿Buscás algo que no está en la tienda? Mandanos tu lista y te armamos el presupuesto.</p>
+</footer>
+
+<!-- carrito -->
+<div id="cartRoot">
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" aria-label="Carrito">
+    <div class="dh"><h2>Tu pedido</h2><button class="x" id="closeCart" aria-label="Cerrar">×</button></div>
+    <div class="items" id="items"></div>
+    <form class="df" id="checkout">
+      <div class="tot"><span>Total</span><span id="total">$ 0</span></div>
+      <div><label for="nombre">Nombre y apellido</label><input id="nombre" required></div>
+      <div><label for="tel">Celular</label><input id="tel" required inputmode="tel" placeholder="09X XXX XXX"></div>
+      <div class="opt"><input type="radio" name="entrega" value="Retiro en tienda, Santana do Livramento" checked id="e1">
+        <label for="e1">Retiro en tienda<small>Rua dos Andradas, Santana do Livramento. Sin costo.</small></label></div>
+      <div class="opt off"><input type="radio" name="entrega" value="envio" disabled id="e2">
+        <label for="e2">Envío a todo Uruguay<small>Próximamente.</small></label></div>
+      <div><label for="obs">Comentarios</label><textarea id="obs" rows="2" placeholder="Horario de retiro, algún pedido especial..."></textarea></div>
+      <p class="err" id="err">Agregá al menos un producto al carrito.</p>
+      <button class="go" type="submit">Confirmar pedido</button>
+      <div class="done" id="done">¡Listo! Tu pedido está armado. Tocá el botón para enviarlo y te respondemos con los datos de pago.
+        <a id="waLink" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+      </div>
+    </form>
+  </aside>
+</div>
+
+<script>
+/* ===== CATÁLOGO: completar con los productos reales =====
+   precio: en pesos uruguayos. Dejá null mientras no esté definido.
+   foto: opcional, una imagen en data URI. */
+const PRODUCTOS = [
+  {id:1, nombre:"Producto de ejemplo Cacau Show", detalle:"Descripción corta y peso", cat:"Cacau Show", precio:null, foto:null},
+  {id:2, nombre:"Producto de ejemplo Cacau Show", detalle:"Descripción corta y peso", cat:"Cacau Show", precio:null, foto:null},
+  {id:3, nombre:"Producto de ejemplo sin gluten", detalle:"Descripción corta y peso", cat:"Sin gluten y sin lactosa", precio:null, foto:null},
+  {id:4, nombre:"Producto de ejemplo sin lactosa", detalle:"Descripción corta y peso", cat:"Sin gluten y sin lactosa", precio:null, foto:null},
+  {id:5, nombre:"Producto de ejemplo almacén", detalle:"Descripción corta y peso", cat:"Almacén", precio:null, foto:null},
+  {id:6, nombre:"Producto de ejemplo limpieza", detalle:"Descripción corta y presentación", cat:"Higiene y limpieza", precio:null, foto:null},
+];
+const WHATSAPP = "59895901032";
+const COLORES = {"Cacau Show":"#5a3424","Sin gluten y sin lactosa":"#2f6b3f","Almacén":"#c98a2b","Higiene y limpieza":"#3c6e8f"};
+
+const fmt = n => "$ " + Math.round(n).toLocaleString("es-UY");
+let filtro = "Todos";
+let carrito = {};
+try { carrito = JSON.parse(localStorage.getItem("chasque_carrito")) || {}; } catch(e) {}
+const guardar = () => { try { localStorage.setItem("chasque_carrito", JSON.stringify(carrito)); } catch(e) {} };
+
+function pintarFiltros(){
+  const cats = ["Todos", ...new Set(PRODUCTOS.map(p=>p.cat))];
+  document.getElementById("filters").innerHTML = cats.map(c=>`<button class="chip ${c===filtro?'on':''}" data-c="${c}">${c}</button>`).join("");
+}
+function pintarGrilla(){
+  const lista = PRODUCTOS.filter(p=>filtro==="Todos"||p.cat===filtro);
+  document.getElementById("grid").innerHTML = lista.map(p=>`
+    <article class="card">
+      <div class="ph" style="background:${COLORES[p.cat]||'#5a3424'}">
+        ${p.foto?`<img src="${p.foto}" alt="${p.nombre}">`:p.nombre.charAt(0)}
+        <span class="tag">${p.cat}</span>
+      </div>
+      <div class="body">
+        <h3>${p.nombre}</h3><p class="det">${p.detalle}</p>
+        <div class="row">
+          ${p.precio!=null?`<span class="price">${fmt(p.precio)}</span>`:`<span class="price pend">Precio a definir</span>`}
+          <button class="add" data-id="${p.id}" ${p.precio==null?'disabled':''}>Agregar</button>
+        </div>
+      </div>
+    </article>`).join("");
+}
+function pintarCarrito(){
+  const ids = Object.keys(carrito).filter(id=>carrito[id]>0 && PRODUCTOS.find(p=>p.id==id));
+  let total = 0, cant = 0;
+  document.getElementById("items").innerHTML = ids.length ? ids.map(id=>{
+    const p = PRODUCTOS.find(x=>x.id==id), q = carrito[id];
+    total += (p.precio||0)*q; cant += q;
+    return `<div class="it"><div><b>${p.nombre}</b><div class="det" style="font-size:13px;color:var(--gris)">${fmt(p.precio||0)} c/u</div></div>
+      <div class="qty"><button type="button" data-m="${id}">−</button>${q}<button type="button" data-p="${id}">+</button></div></div>`;
+  }).join("") : `<p class="empty">Tu carrito está vacío.</p>`;
+  document.getElementById("total").textContent = fmt(total);
+  document.getElementById("count").textContent = cant;
+  guardar();
+}
+
+document.getElementById("filters").addEventListener("click",e=>{ const c=e.target.dataset.c; if(c){filtro=c;pintarFiltros();pintarGrilla();} });
+document.getElementById("grid").addEventListener("click",e=>{ const id=e.target.dataset.id; if(id){carrito[id]=(carrito[id]||0)+1;pintarCarrito();abrir();} });
+document.getElementById("items").addEventListener("click",e=>{
+  const {m,p} = e.target.dataset;
+  if(p) carrito[p]++; if(m) carrito[m]=Math.max(0,carrito[m]-1);
+  if(p||m) pintarCarrito();
+});
+const root = document.getElementById("cartRoot");
+const abrir = ()=>root.classList.add("open"), cerrar = ()=>root.classList.remove("open");
+document.getElementById("openCart").onclick = abrir;
+document.getElementById("closeCart").onclick = cerrar;
+document.getElementById("scrim").onclick = cerrar;
+
+document.getElementById("checkout").addEventListener("submit",e=>{
+  e.preventDefault();
+  const ids = Object.keys(carrito).filter(id=>carrito[id]>0);
+  const err = document.getElementById("err");
+  if(!ids.length){ err.style.display="block"; return; } err.style.display="none";
+  let total = 0;
+  const lineas = ids.map(id=>{ const p=PRODUCTOS.find(x=>x.id==id); total+=(p.precio||0)*carrito[id]; return `• ${carrito[id]} x ${p.nombre} (${fmt((p.precio||0)*carrito[id])})`; });
+  const entrega = document.querySelector('input[name="entrega"]:checked').value;
+  const msg = `Hola! Quiero hacer este pedido en Chasque:\n\n${lineas.join("\n")}\n\nTotal: ${fmt(total)}\nEntrega: ${entrega}\nNombre: ${document.getElementById("nombre").value}\nCelular: ${document.getElementById("tel").value}` + (document.getElementById("obs").value?`\nComentarios: ${document.getElementById("obs").value}`:"");
+  document.getElementById("waLink").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  document.getElementById("done").style.display = "block";
+});
+
+pintarFiltros(); pintarGrilla(); pintarCarrito();
+</script>
+</body>
+</html>
