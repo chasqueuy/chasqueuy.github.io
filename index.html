@@ -133,6 +133,7 @@
     <div class="dh"><h2>Tu pedido</h2><button class="x" id="closeCart" aria-label="Cerrar">×</button></div>
     <div class="items" id="items"></div>
     <form class="df" id="checkout">
+      <div class="sub" id="recRow" style="display:none;justify-content:space-between;font-size:14px;color:var(--gris)"><span>Recargo Mercado Pago (6,1%)</span><span id="rec">$ 0</span></div>
       <div class="tot"><span>Total</span><span id="total">$ 0</span></div>
       <div><label for="nombre">Nombre y apellido</label><input id="nombre" required></div>
       <div><label for="tel">Celular</label><input id="tel" required inputmode="tel" placeholder="09X XXX XXX"></div>
@@ -142,11 +143,11 @@
         <label for="e2">Envío a todo Uruguay<small>Por la empresa que prefieras. El envío se paga al recibir.</small></label></div>
       <div><label>Forma de pago</label></div>
       <div class="opt"><input type="radio" name="pago" value="Link de Mercado Pago" checked id="p1">
-        <label for="p1">Mercado Pago<small>Te enviamos un link para pagar con tarjeta o saldo.</small></label></div>
+        <label for="p1">Mercado Pago<small>Te enviamos un link para pagar con tarjeta o saldo. Tiene un recargo de 6,1% por la comisión de Mercado Pago.</small></label></div>
       <div class="opt"><input type="radio" name="pago" value="Transferencia Prex" id="p2">
-        <label for="p2">Transferencia Prex<small>Te enviamos los datos de la cuenta Prex.</small></label></div>
+        <label for="p2">Transferencia Prex<small>Te enviamos los datos de la cuenta Prex. Sin recargo.</small></label></div>
       <div class="opt"><input type="radio" name="pago" value="Pix" id="p3">
-        <label for="p3">Pix<small>Para quien tiene cuenta en Brasil.</small></label></div>
+        <label for="p3">Pix<small>Para quien tiene cuenta en Brasil. Sin recargo.</small></label></div>
       <div><label for="obs">Comentarios</label><textarea id="obs" rows="2" placeholder="Empresa de envío y dirección, o horario de retiro..."></textarea></div>
       <p class="err" id="err">Agregá al menos un producto al carrito.</p>
       <button class="go" type="submit">Confirmar pedido</button>
@@ -204,6 +205,9 @@ const PRODUCTOS = [
   {id:41, nombre:"Vinagre de manzana orgánico São Roque", detalle:"Botella de vidrio de 500 ml", cat:"Almacén", precio:268, foto:"https://http2.mlstatic.com/D_NQ_NP_2X_757764-MLA111832998930_062026-F.webp"},
 ];
 const WHATSAPP = "59895901032";
+const RECARGO_MP = 0.061; /* 4,99% de Mercado Pago + IVA */
+const esMP = () => { const r=document.querySelector('input[name="pago"]:checked'); return r && r.value==="Link de Mercado Pago"; };
+const recargo = sub => esMP() ? Math.round(sub*RECARGO_MP) : 0;
 const COLORES = {"Cacau Show":"#5a3424","Sin gluten y sin lactosa":"#2f6b3f","Almacén":"#c98a2b","Higiene y limpieza":"#3c6e8f","Tés e infusiones":"#6b5b3e"};
 
 const fmt = n => "$ " + Math.round(n).toLocaleString("es-UY");
@@ -242,7 +246,10 @@ function pintarCarrito(){
     return `<div class="it"><div><b>${p.nombre}</b><div class="det" style="font-size:13px;color:var(--gris)">${fmt(p.precio||0)} c/u</div></div>
       <div class="qty"><button type="button" data-m="${id}">−</button>${q}<button type="button" data-p="${id}">+</button></div></div>`;
   }).join("") : `<p class="empty">Tu carrito está vacío.</p>`;
-  document.getElementById("total").textContent = fmt(total);
+  const rc = recargo(total);
+  document.getElementById("recRow").style.display = rc ? "flex" : "none";
+  document.getElementById("rec").textContent = fmt(rc);
+  document.getElementById("total").textContent = fmt(total + rc);
   document.getElementById("count").textContent = cant;
   guardar();
 }
@@ -260,6 +267,7 @@ document.getElementById("openCart").onclick = abrir;
 document.getElementById("closeCart").onclick = cerrar;
 document.getElementById("scrim").onclick = cerrar;
 
+document.getElementById("checkout").addEventListener("change",e=>{ if(e.target.name==="pago") pintarCarrito(); });
 document.getElementById("checkout").addEventListener("submit",e=>{
   e.preventDefault();
   const ids = Object.keys(carrito).filter(id=>carrito[id]>0);
@@ -268,7 +276,7 @@ document.getElementById("checkout").addEventListener("submit",e=>{
   let total = 0;
   const lineas = ids.map(id=>{ const p=PRODUCTOS.find(x=>x.id==id); total+=(p.precio||0)*carrito[id]; return `• ${carrito[id]} x ${p.nombre} (${fmt((p.precio||0)*carrito[id])})`; });
   const entrega = document.querySelector('input[name="entrega"]:checked').value;
-  const msg = `Hola! Quiero hacer este pedido en Chasque:\n\n${lineas.join("\n")}\n\nTotal: ${fmt(total)}\nEntrega: ${entrega}\nPago: ${document.querySelector('input[name="pago"]:checked').value}\nNombre: ${document.getElementById("nombre").value}\nCelular: ${document.getElementById("tel").value}` + (document.getElementById("obs").value?`\nComentarios: ${document.getElementById("obs").value}`:"");
+  const msg = `Hola! Quiero hacer este pedido en Chasque:\n\n${lineas.join("\n")}${recargo(total)?`\nRecargo Mercado Pago: ${fmt(recargo(total))}`:""}\n\nTotal: ${fmt(total+recargo(total))}\nEntrega: ${entrega}\nPago: ${document.querySelector('input[name="pago"]:checked').value}\nNombre: ${document.getElementById("nombre").value}\nCelular: ${document.getElementById("tel").value}` + (document.getElementById("obs").value?`\nComentarios: ${document.getElementById("obs").value}`:"");
   document.getElementById("waLink").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
   document.getElementById("done").style.display = "block";
 });
