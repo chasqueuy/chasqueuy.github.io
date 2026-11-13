@@ -273,7 +273,7 @@
   <div class="beneficios">
     <div class="ben"><div class="ic" style="background:#ffe8d6"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></div><div><h3>Cacau Show</h3><p>Chocolates exclusivos para regalar o darte un gusto.</p></div></div>
     <div class="ben"><div class="ic" style="background:#e3f4ea"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f7a46" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13V5l8-3 8 3v8a7 7 0 0 1-7 7z"/><path d="M8 12l3 3 5-6"/></svg></div><div><h3>Sin gluten y sin lactosa</h3><p>Opciones para comer rico y cuidarte.</p></div></div>
-    <div class="ben"><div class="ic" style="background:#e1ebf7"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1d3557" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><h3>Envíos a todo Uruguay</h3><p>Por la empresa que elijas. El envío se paga al recibir.</p></div></div>
+    <div class="ben"><div class="ic" style="background:#e1ebf7"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1d3557" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><h3>Envíos a todo Uruguay</h3><p>Despachamos en hasta 48 horas después del pago, por la empresa que elijas.</p></div></div>
   </div>
 
   <main id="tienda">
@@ -298,7 +298,7 @@
       <div class="step"><b>1</b><h3>Elegí</h3><p>Sumá al carrito los productos que querés.</p></div>
       <div class="step"><b>2</b><h3>Confirmá</h3><p>Completá tus datos, la dirección y la empresa de envío.</p></div>
       <div class="step"><b>3</b><h3>Pagá</h3><p>Elegís Mercado Pago, Prex o Pix. Te mandamos los datos por WhatsApp y apartamos tu pedido.</p></div>
-      <div class="step"><b>4</b><h3>Recibí</h3><p>Te lo enviamos por la empresa que elijas. El envío se paga al recibir.</p></div>
+      <div class="step"><b>4</b><h3>Recibí</h3><p>Despachamos en hasta 48 horas después de confirmado el pago, por la empresa que elijas. El plazo de entrega depende de la empresa elegida y el envío se paga al recibir.</p></div>
     </div>
   </section>
 </div>
@@ -342,7 +342,7 @@
       <span class="price" id="mPrecio"></span>
       <div class="mcant"><button type="button" id="mMenos" aria-label="Quitar uno">−</button><b id="mCant">1</b><button type="button" id="mMas" aria-label="Sumar uno">+</button></div>
       <button class="go" type="button" id="mAgregar">Agregar al carrito</button>
-      <p style="font-size:13px;color:var(--gris)">Envío a todo Uruguay por la empresa que elijas, pago al recibir.</p>
+      <p style="font-size:13px;color:var(--gris)">Despacho en hasta 48 horas después del pago. Envío a todo Uruguay por la empresa que elijas, pago al recibir.</p>
     </div>
   </div>
 </div>
@@ -363,7 +363,7 @@
       <div><label for="tel">Celular</label><input id="tel" required inputmode="tel" autocomplete="tel" placeholder="09X XXX XXX"></div>
       <div><label for="dir">Dirección de entrega</label><input id="dir" required autocomplete="street-address" placeholder="Calle, número, ciudad y departamento"></div>
       <div><label for="emp">Empresa de envío</label><input id="emp" required placeholder="La que prefieras"></div>
-      <p style="font-size:13px;color:var(--gris)">El costo del envío se paga al recibir.</p>
+      <p style="font-size:13px;color:var(--gris)">Despachamos en hasta 48 horas después de confirmado el pago. El costo del envío se paga al recibir.</p>
       <div><label>Forma de pago</label></div>
       <div class="opt"><input type="radio" name="pago" value="Link de Mercado Pago" checked id="p1">
         <label for="p1">Mercado Pago<small>Te enviamos un link para pagar con tarjeta o saldo.</small></label></div>
@@ -451,7 +451,7 @@ const FRASES_PORTADA = [
   "¡Hola! Soy el Gurí, el chasque de la casa.",
   "Elegí lo que te guste y armá tu pedido.",
   "¿Buscás algo que no ves? Mandanos tu lista.",
-  "Te lo mando por la empresa que elijas.",
+  "Despacho en hasta 48 horas después del pago.",
   "Pagás con Mercado Pago, Prex o Pix.",
 ];
 const FRASES_CARRITO = ["¡Buena elección!","¡Qué rico eso!","¡Anotado, vecino!","¡Eso vuela!","¡Me gusta tu estilo!"];
@@ -581,7 +581,7 @@ document.getElementById("checkout").addEventListener("submit",e=>{
 /* ayudante del Gurí */
 const RESPUESTAS = [
   {p:"¿Cómo compro?", r:"Elegí tus productos, tocá Carrito, completá tus datos y confirmá. El pedido me llega por WhatsApp."},
-  {p:"¿Cómo me llega?", r:"Te lo enviamos a todo Uruguay por la empresa que elijas. El costo del envío se paga al recibir."},
+  {p:"¿Cómo me llega?", r:"Despachamos en hasta 48 horas después de confirmado el pago, a todo Uruguay y por la empresa que elijas. El plazo de entrega depende de esa empresa y el costo del envío se paga al recibir."},
   {p:"¿Cómo pago?", r:"Con link de Mercado Pago, transferencia Prex o Pix. Cuando recibimos tu pedido te mandamos los datos por WhatsApp y te lo apartamos."},
   {p:"No encuentro algo", r:"¡Mandanos tu lista por WhatsApp y te armamos el presupuesto!", link:true},
   {p:"Hablar por WhatsApp", r:"¡Dale! Escribinos y te respondemos enseguida.", link:true},
@@ -624,7 +624,7 @@ const marca = p => { const n=p.nombre;
      "areaServed":{"@type":"Country","name":"Uruguay"},"currenciesAccepted":"UYU","paymentAccepted":"Mercado Pago, Prex, Pix"},
     {"@type":"ItemList","name":"Productos Chasque","itemListElement":PRODUCTOS.filter(p=>p.precio!=null).map((p,i)=>({"@type":"ListItem","position":i+1,"item":{
       "@type":"Product","name":p.nombre,"description":p.detalle,"category":p.cat,"image":p.foto?base+p.foto:undefined,"url":base+"#p"+p.id,"brand":{"@type":"Brand","name":marca(p)},
-      "offers":{"@type":"Offer","price":p.precio,"priceCurrency":"UYU","availability":"https://schema.org/InStock","url":base+"#p"+p.id,"itemCondition":"https://schema.org/NewCondition","shippingDetails":{"@type":"OfferShippingDetails","shippingDestination":{"@type":"DefinedRegion","addressCountry":"UY"}}}}}))}
+      "offers":{"@type":"Offer","price":p.precio,"priceCurrency":"UYU","availability":"https://schema.org/InStock","url":base+"#p"+p.id,"itemCondition":"https://schema.org/NewCondition","shippingDetails":{"@type":"OfferShippingDetails","shippingDestination":{"@type":"DefinedRegion","addressCountry":"UY"},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":2,"unitCode":"DAY"}}}}}}))}
   ]};
   const s=document.createElement("script"); s.type="application/ld+json"; s.textContent=JSON.stringify(data); document.head.appendChild(s);
 }catch(e){} })();
