@@ -17,144 +17,353 @@
 <meta property="og:image" content="https://chasqueuy.github.io/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cacao:#3b2116; --cacao2:#5a3424; --crema:#fbf5ec; --papel:#fffdf9;
-    --verde:#2f6b3f; --verde2:#e4efe5; --oro:#c98a2b; --tinta:#2a211c; --gris:#7a6e66; --linea:#eadfd1;
+    --azul:#1d3557; --azul2:#2b4a73; --naranja:#ff8a3d; --naranja2:#c2410c; --amarillo:#ffc93c; --rojo:#e63946;
+    --crema:#fff8ec; --papel:#ffffff; --tinta:#2a211c; --gris:#5f5650; --linea:#f0e2cc; --piel:#ffd8b1;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{font-family:Inter,system-ui,sans-serif;background:var(--crema);color:var(--tinta);line-height:1.5}
+  h1,h2,h3,.fred{font-family:Fredoka,sans-serif}
   button{font:inherit;cursor:pointer}
   .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
-  header{position:sticky;top:0;z-index:20;background:rgba(251,245,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
-  .bar{display:flex;align-items:center;justify-content:space-between;height:66px}
-  .logo{font-family:Fraunces,serif;font-weight:800;font-size:22px;color:var(--cacao);letter-spacing:.2px}
-  .logo span{color:var(--verde)}
-  .cartbtn{display:flex;align-items:center;gap:8px;background:var(--cacao);color:#fff;border:0;border-radius:999px;padding:10px 18px;font-weight:600}
-  .badge{background:var(--oro);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px;padding:0 6px}
+  /* barra de mensajes */
+  .cinta{background:var(--amarillo);color:var(--azul);font:600 14px Fredoka,sans-serif;overflow:hidden;white-space:nowrap}
+  .cinta-track{display:inline-block;padding:8px 0;animation:corre 28s linear infinite}
+  .cinta span{margin:0 28px}
+  @keyframes corre{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .hero{background:radial-gradient(1200px 400px at 85% 0%,#7a4a33 0%,transparent 60%),var(--cacao);color:#fff;padding:64px 0 72px}
-  .hero h1{font-family:Fraunces,serif;font-weight:800;font-size:clamp(34px,5.4vw,58px);line-height:1.05;max-width:720px}
-  .hero h1 em{font-style:normal;color:#f2c47a}
-  .hero p{margin-top:18px;max-width:560px;font-size:18px;color:#ecdccd}
-  .hero .cta{margin-top:28px;display:inline-block;background:#f2c47a;color:var(--cacao);font-weight:700;border-radius:999px;padding:14px 26px;text-decoration:none}
-  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-  .pill{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 14px;font-size:14px;color:#f3e6d8}
+  header{position:sticky;top:0;z-index:20;background:rgba(255,248,236,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font:700 26px Fredoka,sans-serif;color:var(--azul);text-decoration:none}
+  .logo b{color:var(--naranja2);font-weight:700}
+  .cartbtn{display:flex;align-items:center;gap:8px;background:var(--azul);color:#fff;border:0;border-radius:999px;padding:10px 18px;font-weight:600;transition:transform .15s}
+  .cartbtn.pop{animation:pop .4s}
+  @keyframes pop{50%{transform:scale(1.12)}}
+  .badge{background:var(--naranja);color:var(--azul);font-weight:700;border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px;padding:0 6px}
 
-  .filters{display:flex;gap:8px;overflow-x:auto;padding:28px 0 8px;scrollbar-width:none}
-  .chip{white-space:nowrap;border:1px solid var(--linea);background:var(--papel);border-radius:999px;padding:9px 16px;font-weight:500;color:var(--cacao2)}
-  .chip.on{background:var(--verde);border-color:var(--verde);color:#fff}
+  /* portada con el Gurí */
+  .hero{background:var(--azul);color:#fff;padding:48px 0 0;overflow:hidden;position:relative}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:end}
+  .hero-txt{padding-bottom:64px}
+  .hola{display:inline-block;background:rgba(255,255,255,.12);border-radius:999px;padding:6px 14px;font:600 14px Fredoka,sans-serif;color:var(--amarillo)}
+  .hero h1{font-weight:700;font-size:clamp(38px,6vw,64px);line-height:1.02;margin-top:14px}
+  .hero h1 em{font-style:normal;color:var(--amarillo)}
+  .hero p.lead{margin-top:16px;max-width:520px;font-size:18px;color:#dbe4f0}
+  .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .cta{display:inline-block;background:var(--amarillo);color:var(--azul);font:700 17px Fredoka,sans-serif;border-radius:999px;padding:14px 26px;text-decoration:none;box-shadow:0 6px 0 #c99712;transition:transform .12s,box-shadow .12s}
+  .cta:hover{transform:translateY(2px);box-shadow:0 4px 0 #c99712}
+  .cta.sec{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);box-shadow:none}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:18px 0 60px}
-  .card{background:var(--papel);border:1px solid var(--linea);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
-  .ph{aspect-ratio:1/1;display:grid;place-items:center;font-family:Fraunces,serif;font-size:44px;color:#fff;position:relative}
+  .escena{position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:360px}
+  .escena::before{content:"";position:absolute;left:50%;bottom:-60px;width:min(380px,90vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ffc93c 0%,#ff8a3d 70%);transform:translateX(-50%);opacity:.95}
+  .guri-grande{position:relative}
+  .globo{position:absolute;top:0;left:0;max-width:260px;background:#fff;color:var(--azul);border-radius:22px;padding:14px 18px;font:600 17px Fredoka,sans-serif;box-shadow:0 10px 24px rgba(0,0,0,.18);min-height:56px}
+  .globo::after{content:"";position:absolute;bottom:-12px;right:46px;border:12px solid transparent;border-top-color:#fff;border-bottom:0}
+  .globo .cursor{display:inline-block;width:2px;height:18px;background:var(--naranja2);vertical-align:-3px;margin-left:2px;animation:parpadea 1s steps(2) infinite}
+  @keyframes parpadea{50%{opacity:0}}
+  .guri-grande{width:min(300px,70vw);height:auto;animation:flota 3.2s ease-in-out infinite;transform-origin:bottom center}
+  @keyframes flota{50%{transform:translateY(-8px)}}
+  .brazo{transform-origin:178px 222px;animation:saluda 1.6s ease-in-out infinite}
+  @keyframes saluda{0%,100%{transform:rotate(0)}25%{transform:rotate(-18deg)}75%{transform:rotate(10deg)}}
+  .ojos{animation:pestanea 4.5s infinite;transform-origin:120px 118px}
+  @keyframes pestanea{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+
+  /* tarjetas de beneficios */
+  .beneficios{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:-32px;position:relative;z-index:2}
+  .ben{background:#fff;border-radius:20px;padding:18px 20px;box-shadow:0 8px 24px rgba(29,53,87,.10);display:flex;gap:14px;align-items:center}
+  .ben .ic{flex:0 0 48px;height:48px;border-radius:14px;display:grid;place-items:center}
+  .ben h3{font-size:18px;color:var(--azul)}
+  .ben p{font-size:14px;color:var(--gris)}
+
+  .sec-tit{display:flex;align-items:center;gap:14px;margin:56px 0 6px}
+  .sec-tit h2{font-size:34px;color:var(--azul)}
+  .sec-sub{color:var(--gris)}
+
+  .filters{display:flex;gap:8px;overflow-x:auto;padding:22px 0 8px;scrollbar-width:none}
+  .chip{white-space:nowrap;border:2px solid var(--linea);background:#fff;border-radius:999px;padding:8px 16px;font:600 15px Fredoka,sans-serif;color:var(--azul2);transition:transform .12s}
+  .chip:hover{transform:translateY(-2px)}
+  .chip.on{background:var(--azul);border-color:var(--azul);color:#fff}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:18px 0 40px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s;opacity:0;transform:translateY(16px)}
+  .card.ver{opacity:1;transform:none}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(29,53,87,.12)}
+  .ph{aspect-ratio:1/1;display:grid;place-items:center;font:700 52px Fredoka,sans-serif;color:#fff;position:relative}
   .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:6px}
   .ph.f{background:#fff!important}
-  .tag{position:absolute;z-index:1;top:12px;left:12px;background:rgba(255,255,255,.92);color:var(--cacao);font:600 11px Inter,sans-serif;letter-spacing:.6px;text-transform:uppercase;border-radius:999px;padding:4px 10px}
+  .tag{position:absolute;z-index:1;box-shadow:0 1px 4px rgba(0,0,0,.12);top:12px;left:12px;background:rgba(255,255,255,.94);color:var(--azul);font:600 12px Fredoka,sans-serif;border-radius:999px;padding:4px 10px}
   .body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
-  .body h3{font-size:16px;font-weight:600}
+  .body h3{font-size:18px;font-weight:600}
   .body .det{font-size:13px;color:var(--gris)}
   .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px}
-  .price{font-weight:700;font-size:18px;color:var(--cacao)}
-  .price.pend{font-size:13px;font-weight:500;color:var(--gris)}
-  .add{background:var(--verde);color:#fff;border:0;border-radius:12px;padding:9px 14px;font-weight:600}
-  .add:disabled{background:#c9c1b8}
+  .price{font:700 20px Fredoka,sans-serif;color:var(--azul)}
+  .price.pend{font:500 13px Inter,sans-serif;color:var(--gris)}
+  .add{background:var(--naranja2);color:#fff;border:0;border-radius:14px;padding:10px 14px;font-weight:600;min-height:44px}
+  .add:disabled{background:#cfc6bb;cursor:not-allowed}
 
-  .how{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:54px 0}
-  .how h2{font-family:Fraunces,serif;font-size:32px;color:var(--cacao);margin-bottom:24px}
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-  .step{border:1px solid var(--linea);border-radius:16px;padding:20px;background:var(--crema)}
-  .step b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--cacao);color:#fff;margin-bottom:10px}
-  footer{padding:36px 0 60px;color:var(--gris);font-size:14px}
+  /* conocé al Gurí */
+  .conoce{background:#fff;border-radius:28px;padding:32px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin:20px 0 10px;border:2px dashed var(--linea)}
+  .conoce h2{font-size:30px;color:var(--azul)}
+  .conoce p{color:var(--gris);margin-top:8px;max-width:620px}
 
-  .wa{position:fixed;right:16px;bottom:16px;z-index:30;display:flex;align-items:center;gap:8px;background:#1f8f4e;color:#fff;text-decoration:none;font-weight:600;border-radius:999px;padding:12px 18px 12px 14px;box-shadow:0 6px 18px rgba(0,0,0,.22)}
-  .wa svg{width:22px;height:22px;flex:none}
-  .open ~ .wa, body.carrito .wa{display:none}
-  @media (max-width:480px){.wa span{display:none}.wa{padding:14px}}
+  .how{padding:40px 0 30px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+  .step{border-radius:22px;padding:22px;background:#fff;border:1px solid var(--linea);position:relative}
+  .step b{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--amarillo);color:var(--azul);font:700 18px Fredoka,sans-serif;margin-bottom:10px}
+  .step h3{color:var(--azul);font-size:20px}
+  .step p{color:var(--gris);font-size:15px}
+
+  footer{background:var(--azul);color:#dbe4f0;padding:40px 0 90px;margin-top:40px;font-size:15px}
+  footer b{color:#fff}
+  footer .f{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+
+  /* ayudante flotante */
+  .ayuda-btn{position:fixed;left:18px;bottom:18px;z-index:30;border:0;background:none;padding:0;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));animation:flota 3s ease-in-out infinite}
+  .ayuda-btn .burbuja{position:absolute;left:66px;bottom:44px;background:#fff;color:var(--azul);font:600 14px Fredoka,sans-serif;white-space:nowrap;border-radius:14px;padding:6px 12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+  .ayuda{position:fixed;left:18px;bottom:96px;z-index:31;width:min(340px,calc(100% - 36px));background:#fff;border-radius:22px;box-shadow:0 18px 40px rgba(0,0,0,.25);overflow:hidden;transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:.2s}
+  .ayuda.open{transform:none;opacity:1;pointer-events:auto}
+  .ayuda-h{background:var(--azul);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;font:600 17px Fredoka,sans-serif}
+  .ayuda-h button{margin-left:auto;background:none;border:0;color:#fff;font-size:24px;min-width:44px;min-height:44px}
+  .ayuda-b{padding:14px 16px;display:flex;flex-direction:column;gap:10px;max-height:360px;overflow:auto}
+  .msg{background:var(--crema);border-radius:16px 16px 16px 4px;padding:10px 12px;font-size:15px}
+  .msg.yo{align-self:flex-end;background:var(--azul);color:#fff;border-radius:16px 16px 4px 16px}
+  .preg{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
+  .preg button{border:2px solid var(--linea);background:#fff;border-radius:999px;padding:8px 12px;font:600 14px Fredoka,sans-serif;color:var(--azul2);min-height:44px}
+
   /* carrito */
-  .scrim{position:fixed;inset:0;background:rgba(30,18,12,.45);opacity:0;pointer-events:none;transition:.2s;z-index:40}
-  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:var(--papel);z-index:50;transform:translateX(100%);transition:.25s;display:flex;flex-direction:column;overflow-y:auto}
+  .scrim{position:fixed;inset:0;background:rgba(15,25,40,.45);opacity:0;pointer-events:none;transition:.2s;z-index:40}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;z-index:50;transform:translateX(100%);transition:.25s;display:flex;flex-direction:column}
   .open .scrim{opacity:1;pointer-events:auto}
   .open .drawer{transform:none}
-  .dh{position:sticky;top:0;background:var(--papel);z-index:1;display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--linea)}
-  .dh h2{font-family:Fraunces,serif;color:var(--cacao)}
-  .x{border:0;background:none;font-size:26px;color:var(--gris)}
-  .items{flex:none;padding:8px 20px}
+  .dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--linea)}
+  .dh h2{color:var(--azul)}
+  .x{border:0;background:none;font-size:28px;color:var(--gris);min-width:44px;min-height:44px}
+  .guri-dice{display:flex;gap:10px;align-items:center;padding:12px 20px;background:var(--crema);font:600 15px Fredoka,sans-serif;color:var(--azul)}
+  .items{flex:1;overflow:auto;padding:8px 20px}
   .it{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--linea)}
   .qty{display:flex;align-items:center;gap:8px}
-  .qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--linea);background:#fff}
+  .qty button{width:36px;height:36px;border-radius:10px;border:1px solid var(--linea);background:#fff;font-size:18px}
   .empty{color:var(--gris);padding:30px 0;text-align:center}
-  .df{padding:18px 20px;border-top:1px solid var(--linea);display:flex;flex-direction:column;gap:12px}
-  .tot{display:flex;justify-content:space-between;font-weight:700;font-size:18px}
-  label{font-size:13px;font-weight:600;color:var(--cacao2)}
-  input,textarea{width:100%;border:1px solid var(--linea);border-radius:10px;padding:10px 12px;font:inherit;background:#fff}
+  .df{padding:16px 20px;border-top:1px solid var(--linea);display:flex;flex-direction:column;gap:12px;overflow:auto;max-height:62vh}
+  .tot{display:flex;justify-content:space-between;font:700 20px Fredoka,sans-serif;color:var(--azul)}
+  label{font-size:13px;font-weight:600;color:var(--azul2)}
+  input,textarea{width:100%;border:1px solid #e3d5c0;border-radius:12px;padding:11px 12px;font:inherit;background:#fff}
   .opt input{width:auto;margin-top:4px;flex:none}
-  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--linea);border-radius:12px;padding:12px;background:#fff}
+  .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--linea);border-radius:14px;padding:12px}
   .opt.off{opacity:.55}
   .opt small{display:block;color:var(--gris);font-weight:400}
-  .go{background:var(--verde);color:#fff;border:0;border-radius:14px;padding:14px;font-weight:700;font-size:16px}
-  .done{display:none;background:var(--verde2);border-radius:14px;padding:14px;font-size:14px}
-  .done a{display:block;margin-top:10px;text-align:center;background:var(--verde);color:#fff;border-radius:12px;padding:12px;font-weight:700;text-decoration:none}
-  .err{color:#a33;font-size:13px;display:none}
+  .go{background:var(--naranja2);color:#fff;border:0;border-radius:16px;padding:15px;font:700 17px Fredoka,sans-serif}
+  .done{display:none;background:#e8f6ec;border-radius:16px;padding:14px;font-size:14px}
+  .done a{display:block;margin-top:10px;text-align:center;background:#1f7a46;color:#fff;border-radius:12px;padding:12px;font-weight:700;text-decoration:none}
+  .err{color:#b42318;font-size:13px;display:none}
+
+  /* buscador, detalle y aviso */
+  .buscar{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--linea);border-radius:999px;padding:6px 16px;margin-top:18px;max-width:520px}
+  .buscar input{border:0;padding:8px 0;font-size:16px;outline:none;background:none}
+  .buscar:focus-within{border-color:var(--naranja)}
+  .nada{grid-column:1/-1;text-align:center;color:var(--gris);padding:30px 0;font:600 17px Fredoka,sans-serif}
+  .card .ph{cursor:zoom-in}
+  .modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(15,25,40,.55);opacity:0;pointer-events:none;transition:.2s}
+  .modal.open{opacity:1;pointer-events:auto}
+  .mbox{background:#fff;border-radius:24px;max-width:760px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;position:relative;transform:scale(.96);transition:.2s}
+  .modal.open .mbox{transform:none}
+  .mbox img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;padding:16px}
+  .mtxt{padding:28px 24px;display:flex;flex-direction:column;gap:10px}
+  .mtxt h3{font-size:26px;color:var(--azul);line-height:1.15}
+  .mtxt .price{font-size:28px}
+  .mcant{display:flex;align-items:center;gap:12px;margin-top:6px}
+  .mcant button{width:44px;height:44px;border-radius:12px;border:2px solid var(--linea);background:#fff;font-size:20px}
+  .mcant b{font:700 20px Fredoka,sans-serif;min-width:24px;text-align:center}
+  .mclose{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:26px;z-index:2}
+  .toast{position:fixed;left:50%;bottom:24px;z-index:70;display:flex;align-items:center;gap:10px;background:var(--azul);color:#fff;border-radius:999px;padding:8px 18px 8px 8px;font:600 15px Fredoka,sans-serif;box-shadow:0 10px 24px rgba(0,0,0,.25);transform:translate(-50%,120px);transition:transform .3s}
+  .toast.show{transform:translate(-50%,0)}
+  .toast button{background:var(--amarillo);color:var(--azul);border:0;border-radius:999px;padding:6px 12px;font:700 14px Fredoka,sans-serif;margin-left:6px}
+  @media (max-width:640px){.mbox{grid-template-columns:1fr}.mtxt{padding:18px}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .body{padding:10px;gap:4px}.body h3{font-size:15px;line-height:1.25}.body .det{font-size:12px}
+    .row{flex-direction:column;align-items:stretch;gap:8px}.price{font-size:18px}.add{width:100%}
+    .tag{font-size:10px;padding:3px 8px;top:8px;left:8px}
+    .ayuda-btn svg{width:52px;height:52px}.ayuda-btn .burbuja{left:56px;bottom:34px}}
+  @media (max-width:760px){
+    .hero .wrap{grid-template-columns:1fr}
+    .hero-txt{padding-bottom:0}
+    .escena{min-height:300px}
+    .conoce{grid-template-columns:1fr;text-align:center;justify-items:center}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .card{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
 
+<div class="cinta" aria-hidden="true"><div class="cinta-track" id="cinta"></div></div>
+
 <header>
   <div class="wrap bar">
-    <div class="logo">Chas<span>que</span></div>
+    <a class="logo" href="#inicio" aria-label="Chasque, inicio">
+      <svg viewBox="0 0 200 200" width="44" height="44" aria-hidden="true"><use href="#cara-guri"/></svg>
+      <span>chas<b>que</b></span>
+    </a>
     <button class="cartbtn" id="openCart">Carrito <span class="badge" id="count">0</span></button>
   </div>
 </header>
 
-<section class="hero">
+<!-- dibujo del Gurí, se reutiliza en toda la página -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="clip-circ"><circle cx="100" cy="100" r="100"/></clipPath>
+    <symbol id="cara-guri" viewBox="0 0 200 200">
+      <g clip-path="url(#clip-circ)">
+        <rect width="200" height="200" fill="#ff8a3d"/>
+        <path d="M46 146 Q100 184 154 146 L100 204 Z" fill="#e63946"/>
+        <circle cx="100" cy="114" r="56" fill="#ffd8b1"/>
+        <g transform="rotate(-9 100 70)"><ellipse cx="104" cy="66" rx="66" ry="25" fill="#1d3557"/><path d="M46 76 Q100 92 158 76 L158 82 Q100 100 46 82 Z" fill="#14263f"/><rect x="100" y="34" width="6" height="12" rx="3" fill="#1d3557"/></g>
+        <circle cx="80" cy="110" r="7" fill="#2a211c"/><circle cx="82.5" cy="107.5" r="2.4" fill="#fff"/>
+        <circle cx="120" cy="110" r="7" fill="#2a211c"/><circle cx="122.5" cy="107.5" r="2.4" fill="#fff"/>
+        <circle cx="68" cy="130" r="9" fill="#ff9b8a" opacity="0.75"/><circle cx="132" cy="130" r="9" fill="#ff9b8a" opacity="0.75"/>
+        <path d="M82 130 Q100 152 118 130 Z" fill="#7a2e1f"/><path d="M90 138 Q100 146 110 138 Q100 141 90 138Z" fill="#ff7a8a"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<section class="hero" id="inicio">
   <div class="wrap">
-    <h1>Lo que te gusta, <em>sin vueltas.</em></h1>
-    <p>Desde Rivera, como los chasques de antes, que llevaban lo importante de pago en pago. Chocolates exclusivos de Cacau Show, almacén, tés, suplementos y una línea sin gluten y sin lactosa. Elegí, pedí y listo.</p>
-    <a class="cta" href="#tienda">Ver productos</a>
-    <div class="pills">
-      <span class="pill">Cacau Show</span><span class="pill">Sin gluten</span><span class="pill">Sin lactosa</span><span class="pill">Almacén</span><span class="pill">Tés e infusiones</span><span class="pill">Suplementos</span>
+    <div class="hero-txt">
+      <span class="hola">¡Hola, vecino!</span>
+      <h1>Lo que te gusta, <em>sin vueltas.</em></h1>
+      <p class="lead">Desde Rivera, chocolates exclusivos de Cacau Show, tés, cafés funcionales y una línea sin gluten y sin lactosa. Elegí, armá tu pedido y el Gurí te lo manda a todo el país.</p>
+      <div class="ctas">
+        <a class="cta" href="#tienda">Ver productos</a>
+        <a class="cta sec" href="#como">Cómo comprar</a>
+      </div>
+    </div>
+    <div class="escena">
+      <div class="globo" aria-live="polite"><span id="globoTxt"></span><span class="cursor"></span></div>
+      <!-- el Gurí de cuerpo entero, saludando -->
+      <svg class="guri-grande" viewBox="0 0 240 320" role="img" aria-label="El Gurí, mascota de Chasque, saludando">
+        <path d="M44 320 Q48 236 120 226 Q192 236 196 320 Z" fill="#1d3557"/>
+        <path d="M60 268 H180 M54 290 H186" stroke="#ff8a3d" stroke-width="7"/>
+        <path d="M60 279 H180" stroke="#ffc93c" stroke-width="5"/>
+        <path d="M64 196 Q120 236 176 196 L120 262 Z" fill="#e63946"/>
+        <g class="brazo">
+          <path d="M178 238 Q204 206 206 168" stroke="#1d3557" stroke-width="22" stroke-linecap="round" fill="none"/>
+          <circle cx="206" cy="160" r="15" fill="#ffd8b1"/>
+        </g>
+        <circle cx="120" cy="140" r="64" fill="#ffd8b1"/>
+        <g transform="rotate(-9 120 92)"><ellipse cx="124" cy="86" rx="76" ry="28" fill="#1d3557"/><path d="M58 98 Q120 116 186 98 L186 105 Q120 124 58 105 Z" fill="#14263f"/><rect x="120" y="50" width="7" height="14" rx="3.5" fill="#1d3557"/></g>
+        <g class="ojos">
+          <circle cx="97" cy="134" r="8" fill="#2a211c"/><circle cx="100" cy="131" r="2.8" fill="#fff"/>
+          <circle cx="143" cy="134" r="8" fill="#2a211c"/><circle cx="146" cy="131" r="2.8" fill="#fff"/>
+        </g>
+        <circle cx="83" cy="158" r="10" fill="#ff9b8a" opacity="0.75"/><circle cx="157" cy="158" r="10" fill="#ff9b8a" opacity="0.75"/>
+        <path d="M99 158 Q120 184 141 158 Z" fill="#7a2e1f"/><path d="M108 168 Q120 177 132 168 Q120 172 108 168Z" fill="#ff7a8a"/>
+      </svg>
     </div>
   </div>
 </section>
 
-<main class="wrap" id="tienda">
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="grid"></div>
-</main>
+<div class="wrap">
+  <div class="beneficios">
+    <div class="ben"><div class="ic" style="background:#ffe8d6"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg></div><div><h3>Cacau Show</h3><p>Chocolates exclusivos para regalar o darte un gusto.</p></div></div>
+    <div class="ben"><div class="ic" style="background:#e3f4ea"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f7a46" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13V5l8-3 8 3v8a7 7 0 0 1-7 7z"/><path d="M8 12l3 3 5-6"/></svg></div><div><h3>Sin gluten y sin lactosa</h3><p>Opciones para comer rico y cuidarte.</p></div></div>
+    <div class="ben"><div class="ic" style="background:#e1ebf7"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1d3557" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><h3>Envíos a todo Uruguay</h3><p>Por la empresa que elijas. El envío se paga al recibir.</p></div></div>
+  </div>
 
-<section class="how">
-  <div class="wrap">
-    <h2>Cómo comprar</h2>
+  <main id="tienda">
+    <div class="sec-tit"><h2>Elegí lo tuyo</h2></div>
+    <p class="sec-sub">Buscá, tocá una foto para ver el detalle y sumá al carrito.</p>
+    <label class="buscar" for="q"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5f5650" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Buscá trufas, sin lactosa, café..." aria-label="Buscar productos"></label>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <section class="conoce" aria-labelledby="conoce-t">
+    <svg viewBox="0 0 200 200" width="150" height="150" aria-hidden="true"><use href="#cara-guri"/></svg>
+    <div>
+      <h2 id="conoce-t">Conocé al Gurí</h2>
+      <p>Hace mucho tiempo, en el campo, los chasques eran los mensajeros que llevaban noticias y encargos de pago en pago. El Gurí es nuestro chasque: alegre, rápido y siempre con algo rico en la bolsa. Él arma tu pedido con cariño, como si fuera para la familia.</p>
+    </div>
+  </section>
+
+  <section class="how" id="como">
+    <div class="sec-tit"><h2>Cómo comprar</h2></div>
     <div class="steps">
       <div class="step"><b>1</b><h3>Elegí</h3><p>Sumá al carrito los productos que querés.</p></div>
       <div class="step"><b>2</b><h3>Confirmá</h3><p>Completá tus datos, la dirección y la empresa de envío.</p></div>
-      <div class="step"><b>3</b><h3>Pagá</h3><p>Elegís cómo pagar: link de Mercado Pago, transferencia Prex o Pix. Te enviamos los datos por WhatsApp y apartamos tu pedido.</p></div>
+      <div class="step"><b>3</b><h3>Pagá</h3><p>Elegís Mercado Pago, Prex o Pix. Te mandamos los datos por WhatsApp y apartamos tu pedido.</p></div>
       <div class="step"><b>4</b><h3>Recibí</h3><p>Te lo enviamos por la empresa que elijas. El envío se paga al recibir.</p></div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<footer class="wrap">
-  <p><b>Chasque</b> · Rivera, Uruguay · WhatsApp +598 95 901 032</p>
-  <p style="margin-top:6px">¿Buscás algo que no está en la tienda? Mandanos tu lista y te armamos el presupuesto.</p>
+<footer>
+  <div class="wrap f">
+    <div>
+      <p><b>Chasque</b> · Rivera, Uruguay</p>
+      <p>Envíos a todo el país · Mercado Pago, Prex y Pix</p>
+    </div>
+    <p>WhatsApp <a href="https://wa.me/59895901032" target="_blank" rel="noopener" style="color:#fff"><b>+598 95 901 032</b></a></p>
+  </div>
 </footer>
+
+<!-- ayudante -->
+<button class="ayuda-btn" id="ayudaBtn" aria-label="Hablar con el Gurí" aria-expanded="false" aria-controls="ayuda">
+  <svg viewBox="0 0 200 200" width="64" height="64" aria-hidden="true"><use href="#cara-guri"/></svg>
+  <span class="burbuja" id="burbuja">¿Te ayudo?</span>
+</button>
+<div class="ayuda" id="ayuda" role="dialog" aria-label="Ayuda del Gurí">
+  <div class="ayuda-h">
+    <svg viewBox="0 0 200 200" width="34" height="34" aria-hidden="true"><use href="#cara-guri"/></svg>
+    El Gurí te ayuda
+    <button id="ayudaX" aria-label="Cerrar">×</button>
+  </div>
+  <div class="ayuda-b" id="charla">
+    <div class="msg">¡Hola! Soy el Gurí. ¿En qué te doy una mano?</div>
+  </div>
+  <div class="preg" id="preguntas"></div>
+</div>
+
+<!-- detalle del producto -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mNombre">
+  <div class="mbox">
+    <button class="mclose" id="mClose" aria-label="Cerrar">×</button>
+    <img id="mFoto" alt="">
+    <div class="mtxt">
+      <span class="tag" id="mCat" style="position:static;align-self:flex-start;background:var(--crema)"></span>
+      <h3 id="mNombre"></h3>
+      <p class="det" id="mDet" style="color:var(--gris)"></p>
+      <span class="price" id="mPrecio"></span>
+      <div class="mcant"><button type="button" id="mMenos" aria-label="Quitar uno">−</button><b id="mCant">1</b><button type="button" id="mMas" aria-label="Sumar uno">+</button></div>
+      <button class="go" type="button" id="mAgregar">Agregar al carrito</button>
+      <p style="font-size:13px;color:var(--gris)">Envío a todo Uruguay por la empresa que elijas, pago al recibir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- aviso -->
+<div class="toast" id="toast" role="status" aria-live="polite"><svg viewBox="0 0 200 200" width="36" height="36" aria-hidden="true"><use href="#cara-guri"/></svg><span id="toastTxt"></span><button type="button" id="toastVer">Ver carrito</button></div>
 
 <!-- carrito -->
 <div id="cartRoot">
   <div class="scrim" id="scrim"></div>
   <aside class="drawer" aria-label="Carrito">
     <div class="dh"><h2>Tu pedido</h2><button class="x" id="closeCart" aria-label="Cerrar">×</button></div>
+    <div class="guri-dice"><svg viewBox="0 0 200 200" width="38" height="38" aria-hidden="true"><use href="#cara-guri"/></svg><span id="guriDice">Tu carrito está esperando algo rico.</span></div>
     <div class="items" id="items"></div>
     <form class="df" id="checkout">
       <div class="tot"><span>Total</span><span id="total">$ 0</span></div>
-      <div><label for="nombre">Nombre y apellido</label><input id="nombre" required></div>
-      <div><label for="tel">Celular</label><input id="tel" required inputmode="tel" placeholder="09X XXX XXX"></div>
-      <div><label for="dir">Dirección de entrega</label><input id="dir" required placeholder="Calle, número, ciudad y departamento"></div>
+      <div><label for="nombre">Nombre y apellido</label><input id="nombre" required autocomplete="name"></div>
+      <div><label for="tel">Celular</label><input id="tel" required inputmode="tel" autocomplete="tel" placeholder="09X XXX XXX"></div>
+      <div><label for="dir">Dirección de entrega</label><input id="dir" required autocomplete="street-address" placeholder="Calle, número, ciudad y departamento"></div>
       <div><label for="emp">Empresa de envío</label><input id="emp" required placeholder="La que prefieras"></div>
-      <p class="det" style="font-size:13px;color:var(--gris)">Enviamos por la empresa que elijas. El costo del envío se paga al recibir.</p>
+      <p style="font-size:13px;color:var(--gris)">El costo del envío se paga al recibir.</p>
       <div><label>Forma de pago</label></div>
       <div class="opt"><input type="radio" name="pago" value="Link de Mercado Pago" checked id="p1">
         <label for="p1">Mercado Pago<small>Te enviamos un link para pagar con tarjeta o saldo.</small></label></div>
@@ -165,22 +374,15 @@
       <div><label for="obs">Comentarios</label><textarea id="obs" rows="2" placeholder="Algún dato más para la entrega..."></textarea></div>
       <p class="err" id="err">Agregá al menos un producto al carrito.</p>
       <button class="go" type="submit">Confirmar pedido</button>
-      <div class="done" id="done">¡Listo! Tu pedido está armado. Tocá el botón para enviarlo y te respondemos con los datos para pagar.
+      <div class="done" id="done">¡Listo! Tu pedido está armado. Tocá el botón para enviarlo y te respondemos con los datos de pago.
         <a id="waLink" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
       </div>
     </form>
   </aside>
 </div>
 
-<a class="wa" id="waFlot" href="https://wa.me/59895901032?text=Hola!%20Tengo%20una%20consulta%20sobre%20Chasque" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L3 21l1.5-5.4A8.5 8.5 0 1 1 21 12z"/></svg>
-  <span>Escribinos</span>
-</a>
-
 <script>
-/* ===== CATÁLOGO: completar con los productos reales =====
-   precio: en pesos uruguayos. Dejá null mientras no esté definido.
-   foto: opcional, una imagen en data URI. */
+/* ===== CATÁLOGO ===== precio en pesos uruguayos; foto en la carpeta img */
 const PRODUCTOS = [
   {id:1, nombre:"Kit de 6 trufas surtidas Bless sin azúcar", detalle:"6 trufas surtidas", cat:"Cacau Show", precio:395, foto:"img/p1.webp"},
   {id:2, nombre:"Tableta Lacreme sin azúcar agregado", detalle:"100 g", cat:"Cacau Show", precio:255, foto:"img/p2.webp"},
@@ -242,23 +444,56 @@ const PRODUCTOS = [
   {id:76, nombre:"Lonchera Paw Patrol Dino Chase y Skye", detalle:"Infantil", cat:"Accesorios", precio:748, foto:"img/p76.webp"},
 ];
 const WHATSAPP = "59895901032";
-const COLORES = {"Cacau Show":"#5a3424","Sin gluten y sin lactosa":"#2f6b3f","Almacén":"#c98a2b","Higiene y limpieza":"#3c6e8f","Tés e infusiones":"#6b5b3e","Suplementos y cafés funcionales":"#7a3e2b","Accesorios":"#3c6e8f"};
+const COLORES = {"Cacau Show":"#6b3a22","Sin gluten y sin lactosa":"#1f7a46","Almacén":"#c2410c","Tés e infusiones":"#6b5b3e","Suplementos y cafés funcionales":"#7a3e2b","Accesorios":"#2b6cb0"};
+
+/* frases del Gurí */
+const FRASES_PORTADA = [
+  "¡Hola! Soy el Gurí, el chasque de la casa.",
+  "Elegí lo que te guste y armá tu pedido.",
+  "¿Buscás algo que no ves? Mandanos tu lista.",
+  "Te lo mando por la empresa que elijas.",
+  "Pagás con Mercado Pago, Prex o Pix.",
+];
+const FRASES_CARRITO = ["¡Buena elección!","¡Qué rico eso!","¡Anotado, vecino!","¡Eso vuela!","¡Me gusta tu estilo!"];
+const CINTA = ["Chocolates exclusivos Cacau Show","Línea sin gluten y sin lactosa","Envíos a todo Uruguay","Pagá con Mercado Pago, Prex o Pix","¿No encontrás algo? Mandanos tu lista"];
 
 const fmt = n => "$ " + Math.round(n).toLocaleString("es-UY");
-let filtro = "Todos";
+let filtro = "Todos", busca = "";
+const norm = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 let carrito = {};
 try { carrito = JSON.parse(localStorage.getItem("chasque_carrito")) || {}; } catch(e) {}
 const guardar = () => { try { localStorage.setItem("chasque_carrito", JSON.stringify(carrito)); } catch(e) {} };
+const azar = a => a[Math.floor(Math.random()*a.length)];
+
+/* cinta */
+const txt = CINTA.map(t=>`<span>★ ${t}</span>`).join("");
+document.getElementById("cinta").innerHTML = txt + txt;
+
+/* globo que escribe */
+(function escribir(){
+  const el = document.getElementById("globoTxt");
+  let i = 0, j = 0, borrando = false;
+  const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (quieto){ el.textContent = FRASES_PORTADA[0]; return; }
+  (function paso(){
+    const f = FRASES_PORTADA[i];
+    if(!borrando){ j++; el.textContent = f.slice(0,j); if(j===f.length){ borrando=true; return setTimeout(paso,2200);} }
+    else { j--; el.textContent = f.slice(0,j); if(j===0){ borrando=false; i=(i+1)%FRASES_PORTADA.length; } }
+    setTimeout(paso, borrando?22:45);
+  })();
+})();
 
 function pintarFiltros(){
   const cats = ["Todos", ...new Set(PRODUCTOS.map(p=>p.cat))];
   document.getElementById("filters").innerHTML = cats.map(c=>`<button class="chip ${c===filtro?'on':''}" data-c="${c}">${c}</button>`).join("");
 }
+const obs = "IntersectionObserver" in window ? new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("ver"); obs.unobserve(e.target);} }),{threshold:.15}) : null;
 function pintarGrilla(){
-  const lista = PRODUCTOS.filter(p=>filtro==="Todos"||p.cat===filtro);
-  document.getElementById("grid").innerHTML = lista.map(p=>`
-    <article class="card" id="p${p.id}">
-      <div class="ph${p.foto?' f':''}" style="background:${COLORES[p.cat]||'#5a3424'}">
+  const lista = PRODUCTOS.filter(p=>(filtro==="Todos"||p.cat===filtro) && (!busca || norm(p.nombre+" "+p.detalle+" "+p.cat).includes(busca)));
+  const g = document.getElementById("grid");
+  g.innerHTML = lista.map((p,k)=>`
+    <article class="card" id="p${p.id}" style="transition-delay:${Math.min(k,8)*60}ms">
+      <div class="ph${p.foto?' f':''}" style="background:${COLORES[p.cat]||'#1d3557'}">
         ${p.foto?`<img src="${p.foto}" alt="${p.nombre}" loading="lazy">`:p.nombre.charAt(0)}
         <span class="tag">${p.cat}</span>
       </div>
@@ -270,6 +505,8 @@ function pintarGrilla(){
         </div>
       </div>
     </article>`).join("");
+  if(!lista.length) g.innerHTML = `<p class="nada">El Gurí no encontró nada con eso. ¡Mandanos tu lista por WhatsApp!</p>`;
+  g.querySelectorAll(".card").forEach(c=> obs ? obs.observe(c) : c.classList.add("ver"));
 }
 function pintarCarrito(){
   const ids = Object.keys(carrito).filter(id=>carrito[id]>0 && PRODUCTOS.find(p=>p.id==id));
@@ -277,23 +514,53 @@ function pintarCarrito(){
   document.getElementById("items").innerHTML = ids.length ? ids.map(id=>{
     const p = PRODUCTOS.find(x=>x.id==id), q = carrito[id];
     total += (p.precio||0)*q; cant += q;
-    return `<div class="it"><div><b>${p.nombre}</b><div class="det" style="font-size:13px;color:var(--gris)">${fmt(p.precio||0)} c/u</div></div>
-      <div class="qty"><button type="button" data-m="${id}">−</button>${q}<button type="button" data-p="${id}">+</button></div></div>`;
-  }).join("") : `<p class="empty">Tu carrito está vacío.</p>`;
+    return `<div class="it"><div><b>${p.nombre}</b><div style="font-size:13px;color:var(--gris)">${fmt(p.precio||0)} c/u</div></div>
+      <div class="qty"><button type="button" data-m="${id}" aria-label="Quitar uno">−</button>${q}<button type="button" data-p="${id}" aria-label="Sumar uno">+</button></div></div>`;
+  }).join("") : `<p class="empty">Todavía no elegiste nada.</p>`;
   document.getElementById("total").textContent = fmt(total);
   document.getElementById("count").textContent = cant;
   guardar();
 }
 
 document.getElementById("filters").addEventListener("click",e=>{ const c=e.target.dataset.c; if(c){filtro=c;pintarFiltros();pintarGrilla();} });
-document.getElementById("grid").addEventListener("click",e=>{ const id=e.target.dataset.id; if(id){carrito[id]=(carrito[id]||0)+1;pintarCarrito();abrir();} });
+let tTimer;
+function sumar(id,n){
+  carrito[id]=(carrito[id]||0)+n; pintarCarrito();
+  const f=azar(FRASES_CARRITO);
+  document.getElementById("guriDice").textContent = f;
+  const b=document.getElementById("openCart"); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop");
+  const t=document.getElementById("toast"); document.getElementById("toastTxt").textContent = f+" Lo sumé al carrito.";
+  t.classList.add("show"); clearTimeout(tTimer); tTimer=setTimeout(()=>t.classList.remove("show"),2600);
+}
+document.getElementById("toastVer").onclick = ()=>{ document.getElementById("toast").classList.remove("show"); abrir(); };
+document.getElementById("q").addEventListener("input",e=>{ busca=norm(e.target.value.trim()); pintarGrilla(); });
+document.getElementById("grid").addEventListener("click",e=>{
+  const id=e.target.dataset.id; if(id){ sumar(id,1); return; }
+  const card=e.target.closest(".card"); if(card && e.target.closest(".ph,h3")) verDetalle(+card.id.slice(1));
+});
+/* detalle */
+const modal=document.getElementById("modal"); let mId=null, mN=1;
+function verDetalle(id){
+  const p=PRODUCTOS.find(x=>x.id===id); if(!p) return; mId=id; mN=1;
+  document.getElementById("mFoto").src=p.foto||""; document.getElementById("mFoto").alt=p.nombre;
+  document.getElementById("mCat").textContent=p.cat; document.getElementById("mNombre").textContent=p.nombre;
+  document.getElementById("mDet").textContent=p.detalle; document.getElementById("mPrecio").textContent=fmt(p.precio);
+  document.getElementById("mCant").textContent=mN; modal.classList.add("open"); document.querySelector(".mbox").scrollTop=0;
+}
+const cerrarM=()=>modal.classList.remove("open");
+document.getElementById("mClose").onclick=cerrarM;
+modal.addEventListener("click",e=>{ if(e.target===modal) cerrarM(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ cerrarM(); cerrar(); } });
+document.getElementById("mMas").onclick=()=>{ mN++; document.getElementById("mCant").textContent=mN; };
+document.getElementById("mMenos").onclick=()=>{ mN=Math.max(1,mN-1); document.getElementById("mCant").textContent=mN; };
+document.getElementById("mAgregar").onclick=()=>{ sumar(mId,mN); cerrarM(); };
 document.getElementById("items").addEventListener("click",e=>{
   const {m,p} = e.target.dataset;
   if(p) carrito[p]++; if(m) carrito[m]=Math.max(0,carrito[m]-1);
   if(p||m) pintarCarrito();
 });
 const root = document.getElementById("cartRoot");
-const abrir = ()=>{root.classList.add("open");document.body.classList.add("carrito");}, cerrar = ()=>{root.classList.remove("open");document.body.classList.remove("carrito");};
+const abrir = ()=>root.classList.add("open"), cerrar = ()=>root.classList.remove("open");
 document.getElementById("openCart").onclick = abrir;
 document.getElementById("closeCart").onclick = cerrar;
 document.getElementById("scrim").onclick = cerrar;
@@ -305,10 +572,36 @@ document.getElementById("checkout").addEventListener("submit",e=>{
   if(!ids.length){ err.style.display="block"; return; } err.style.display="none";
   let total = 0;
   const lineas = ids.map(id=>{ const p=PRODUCTOS.find(x=>x.id==id); total+=(p.precio||0)*carrito[id]; return `• ${carrito[id]} x ${p.nombre} (${fmt((p.precio||0)*carrito[id])})`; });
-  const msg = `Hola! Quiero hacer este pedido en Chasque:\n\n${lineas.join("\n")}\n\nTotal: ${fmt(total)}\nEnvío a: ${document.getElementById("dir").value}\nEmpresa de envío: ${document.getElementById("emp").value} (pago al recibir)\nPago: ${document.querySelector('input[name="pago"]:checked').value}\nNombre: ${document.getElementById("nombre").value}\nCelular: ${document.getElementById("tel").value}` + (document.getElementById("obs").value?`\nComentarios: ${document.getElementById("obs").value}`:"");
+  const msg = `¡Hola Chasque! Quiero hacer este pedido:\n\n${lineas.join("\n")}\n\nTotal: ${fmt(total)}\nEnvío a: ${document.getElementById("dir").value}\nEmpresa de envío: ${document.getElementById("emp").value} (pago al recibir)\nPago: ${document.querySelector('input[name="pago"]:checked').value}\nNombre: ${document.getElementById("nombre").value}\nCelular: ${document.getElementById("tel").value}` + (document.getElementById("obs").value?`\nComentarios: ${document.getElementById("obs").value}`:"");
   document.getElementById("waLink").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
   document.getElementById("done").style.display = "block";
+  document.getElementById("guriDice").textContent = "¡Ya casi! Mandame el pedido por WhatsApp.";
 });
+
+/* ayudante del Gurí */
+const RESPUESTAS = [
+  {p:"¿Cómo compro?", r:"Elegí tus productos, tocá Carrito, completá tus datos y confirmá. El pedido me llega por WhatsApp."},
+  {p:"¿Cómo me llega?", r:"Te lo enviamos a todo Uruguay por la empresa que elijas. El costo del envío se paga al recibir."},
+  {p:"¿Cómo pago?", r:"Con link de Mercado Pago, transferencia Prex o Pix. Cuando recibimos tu pedido te mandamos los datos por WhatsApp y te lo apartamos."},
+  {p:"No encuentro algo", r:"¡Mandanos tu lista por WhatsApp y te armamos el presupuesto!", link:true},
+  {p:"Hablar por WhatsApp", r:"¡Dale! Escribinos y te respondemos enseguida.", link:true},
+];
+const panel = document.getElementById("ayuda"), btnA = document.getElementById("ayudaBtn"), charla = document.getElementById("charla");
+document.getElementById("preguntas").innerHTML = RESPUESTAS.map((x,i)=>`<button type="button" data-i="${i}">${x.p}</button>`).join("");
+document.getElementById("preguntas").addEventListener("click",e=>{
+  const i=e.target.dataset.i; if(i==null) return;
+  const x=RESPUESTAS[i];
+  charla.insertAdjacentHTML("beforeend",`<div class="msg yo">${x.p}</div>`);
+  setTimeout(()=>{
+    charla.insertAdjacentHTML("beforeend",`<div class="msg">${x.r}${x.link?` <a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent("¡Hola Chasque! Quiero pedir presupuesto de esta lista:")}" target="_blank" rel="noopener">Abrir WhatsApp</a>`:""}</div>`);
+    charla.scrollTop = charla.scrollHeight;
+  },350);
+  charla.scrollTop = charla.scrollHeight;
+});
+const toggleA = abrirlo => { panel.classList.toggle("open",abrirlo); btnA.setAttribute("aria-expanded",abrirlo); document.getElementById("burbuja").style.display = abrirlo?"none":""; };
+btnA.onclick = ()=>toggleA(!panel.classList.contains("open"));
+setTimeout(()=>{ const bb=document.getElementById("burbuja"); if(bb && !panel.classList.contains("open")) bb.style.display="none"; },6000);
+document.getElementById("ayudaX").onclick = ()=>toggleA(false);
 
 pintarFiltros(); pintarGrilla(); pintarCarrito();
 
