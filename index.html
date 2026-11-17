@@ -137,19 +137,19 @@
 
   /* carrito */
   .scrim{position:fixed;inset:0;background:rgba(15,25,40,.45);opacity:0;pointer-events:none;transition:.2s;z-index:40}
-  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;z-index:50;transform:translateX(100%);transition:.25s;display:flex;flex-direction:column}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;z-index:50;transform:translateX(100%);transition:.25s;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
   .open .scrim{opacity:1;pointer-events:auto}
   .open .drawer{transform:none}
   .dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--linea)}
   .dh h2{color:var(--azul)}
   .x{border:0;background:none;font-size:28px;color:var(--gris);min-width:44px;min-height:44px}
   .guri-dice{display:flex;gap:10px;align-items:center;padding:12px 20px;background:var(--crema);font:600 15px Fredoka,sans-serif;color:var(--azul)}
-  .items{flex:1;overflow:auto;padding:8px 20px}
+  .items{flex:none;padding:8px 20px}
   .it{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--linea)}
   .qty{display:flex;align-items:center;gap:8px}
   .qty button{width:36px;height:36px;border-radius:10px;border:1px solid var(--linea);background:#fff;font-size:18px}
   .empty{color:var(--gris);padding:30px 0;text-align:center}
-  .df{padding:16px 20px;border-top:1px solid var(--linea);display:flex;flex-direction:column;gap:12px;overflow:auto;max-height:62vh}
+  .df{padding:16px 20px;border-top:1px solid var(--linea);display:flex;flex-direction:column;gap:12px}
   .tot{display:flex;justify-content:space-between;font:700 20px Fredoka,sans-serif;color:var(--azul)}
   label{font-size:13px;font-weight:600;color:var(--azul2)}
   input,textarea{width:100%;border:1px solid #e3d5c0;border-radius:12px;padding:11px 12px;font:inherit;background:#fff}
@@ -620,7 +620,7 @@ document.getElementById("items").addEventListener("click",e=>{
   if(p||m) pintarCarrito();
 });
 const root = document.getElementById("cartRoot");
-const abrir = ()=>root.classList.add("open"), cerrar = ()=>root.classList.remove("open");
+const abrir = ()=>{ root.classList.add("open"); document.getElementById("toast").classList.remove("show"); }, cerrar = ()=>root.classList.remove("open");
 document.getElementById("openCart").onclick = abrir;
 document.getElementById("closeCart").onclick = cerrar;
 document.getElementById("scrim").onclick = cerrar;
