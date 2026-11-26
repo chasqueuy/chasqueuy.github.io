@@ -112,6 +112,9 @@
 
   /* compras en Brasil */
   .brasil{background:var(--azul);color:#fff;border-radius:28px;padding:34px;margin:34px 0 10px}
+  .br-mas{margin:16px 0 0!important}.br-mas a{color:var(--amarillo);font-weight:600}
+  .br-pasos h2{font-size:28px}
+  .br-pasos .steps{margin-top:16px}
   .br-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
   .br-kick{display:inline-block;background:var(--amarillo);color:var(--azul);font:700 15px Fredoka,sans-serif;border-radius:999px;padding:6px 14px}
   .brasil h2{font-size:34px;color:#fff;margin:10px 0 8px}
@@ -121,7 +124,8 @@
   .br-steps .step{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18)}
   .br-steps .step h3{color:var(--amarillo)}
   .br-steps .step p{color:#dbe4f0}
-  @media (max-width:640px){.br-top{grid-template-columns:1fr}.br-top svg{display:none}.brasil{padding:24px}.brasil h2{font-size:28px}}
+  #brasil,#brasil-pasos,#tienda{scroll-margin-top:84px}
+  @media (max-width:640px){.br-top{grid-template-columns:1fr}.br-top svg{display:none}.brasil{padding:22px}.brasil h2{font-size:28px}.brasil p{margin-bottom:14px}.br-cats{gap:6px;margin-top:16px}.br-cats span{font-size:12.5px;padding:5px 10px}}
 
   .how{padding:40px 0 30px}
   .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
@@ -291,6 +295,22 @@
     <a class="ben" href="#brasil" style="text-decoration:none"><div class="ic" style="background:#fff4cc"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#b7791f" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></div><div><h3>Compras en Brasil</h3><p>Vos pedís, nosotros lo buscamos y lo compramos por vos.</p></div></a>
   </div>
 
+  <section class="brasil" id="brasil" aria-labelledby="brasil-t">
+    <div class="br-top">
+      <div>
+        <span class="br-kick">Nuevo en Chasque 🇧🇷</span>
+        <h2 id="brasil-t">Tu persona en Brasil</h2>
+        <p>¿Querés algo de Brasil? Contanos qué buscás: lo encontramos, te mandamos fotos y la cotización antes de comprar y coordinamos el envío contigo. Vos decidís siempre.</p>
+        <a class="cta" href="https://wa.me/59895901032?text=Hola%20Chasque%2C%20quiero%20encargar%20algo%20de%20Brasil%3A%20" target="_blank" rel="noopener">Contanos qué buscás</a>
+      </div>
+      <svg viewBox="0 0 200 200" width="170" height="170" aria-hidden="true"><use href="#cara-guri"/></svg>
+    </div>
+    <div class="br-cats">
+      <span>🧺 Canastas y alimentos</span><span>🧴 Higiene y limpieza</span><span>👕 Ropa y calzado</span><span>💄 Belleza y perfumería</span><span>🏠 Hogar y cocina</span><span>🧸 Juguetes y útiles</span><span>🎁 Regalos</span><span>🏪 Compras por cantidad para comercios</span>
+    </div>
+    <p class="br-mas"><a href="#brasil-pasos">Cómo funciona, paso a paso ↓</a></p>
+  </section>
+
   <main id="tienda">
     <div class="sec-tit"><h2>Elegí lo tuyo</h2></div>
     <p class="sec-sub">Buscá, tocá una foto para ver el detalle y sumá al carrito.</p>
@@ -300,25 +320,15 @@
   </main>
 
 
-  <section class="brasil" id="brasil" aria-labelledby="brasil-t">
-    <div class="br-top">
-      <div>
-        <span class="br-kick">Nuevo en Chasque 🇧🇷</span>
-        <h2 id="brasil-t">Tu persona en Brasil</h2>
-        <p>¿Hay algo de Brasil que querés y no sabés cómo conseguir? Lo buscamos según tus medidas, gustos y presupuesto, comparamos opciones, te mostramos fotos antes de comprar y coordinamos el envío contigo. Vos decidís siempre.</p>
-        <a class="cta" href="https://wa.me/59895901032?text=Hola%20Chasque%2C%20quiero%20encargar%20algo%20de%20Brasil%3A%20" target="_blank" rel="noopener">Contanos qué buscás</a>
-      </div>
-      <svg viewBox="0 0 200 200" width="170" height="170" aria-hidden="true"><use href="#cara-guri"/></svg>
-    </div>
-    <div class="br-cats">
-      <span>🧺 Canastas y alimentos</span><span>🧴 Higiene y limpieza</span><span>👕 Ropa y calzado</span><span>💄 Belleza y perfumería</span><span>🏠 Hogar y cocina</span><span>🧸 Juguetes y útiles</span><span>🎁 Regalos</span><span>🏪 Compras por cantidad para comercios</span>
-    </div>
+  <section class="brasil br-pasos" id="brasil-pasos" aria-label="Compras en Brasil, paso a paso">
+    <h2>Compras en Brasil, paso a paso</h2>
     <div class="steps br-steps">
       <div class="step"><b>1</b><h3>Nos contás</h3><p>Escribinos por WhatsApp qué buscás. Si tenés foto o link, mejor.</p></div>
       <div class="step"><b>2</b><h3>Lo buscamos</h3><p>Recorremos las tiendas de Brasil y comparamos opciones por vos.</p></div>
       <div class="step"><b>3</b><h3>Te cotizamos</h3><p>Te pasamos la cotización con fotos antes de comprar. Sin compromiso.</p></div>
       <div class="step"><b>4</b><h3>Confirmás</h3><p>Lo compramos y coordinamos el envío contigo.</p></div>
     </div>
+    <a class="cta" href="https://wa.me/59895901032?text=Hola%20Chasque%2C%20quiero%20encargar%20algo%20de%20Brasil%3A%20" target="_blank" rel="noopener" style="margin-top:20px">Contanos qué buscás</a>
   </section>
 
   <section class="conoce" aria-labelledby="conoce-t">
